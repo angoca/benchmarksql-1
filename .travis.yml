@@ -1,0 +1,54 @@
+language: sql
+# blacklist
+branches:
+  - master
+
+env:
+  # Put any other RDBMS in this area. This allow to trigger another branch in Travis-CI.
+  # - DB=myRDBMS
+  - DB=postgres
+
+before_install:
+  # Compiles the sources.
+  - mvn
+
+  - pwd ; df -h
+
+  # Install the required libraries
+  - sudo apt-get update -qq
+
+  # For each RDBMS, you can configure the database in this part.
+  # myRDBMS
+  # - sh -c "if [ '$DB' = 'myRDBMS' ]; then echo "Configure the rdbms in this area." ; fi"
+
+  # Postgres
+  - sh -c "if [ '$DB' = 'postgres' ]; then sudo -u postgres psql -c \"create user benchmarksql with superuser password 'PWbmsql'\" ; fi"
+  - sh -c "if [ '$DB' = 'postgres' ]; then sudo -u postgres psql -c \"grant all privileges on database postgres to benchmarksql\" ; fi"
+
+  - df -h
+  - df -ih
+
+install:
+  - cd ${TRAVIS_BUILD_DIR} ; mvn
+  - cd ${TRAVIS_BUILD_DIR}/target/run
+
+  # For each RDBMS you can create the tables, load the data and prepares the database for the benchmark.
+  # myRDBMS
+  # - sh -c "if [ '$DB' = 'myRDBMS' ]; then ./runDatabaseBuild.sh myRDBMS.properties ; fi"
+
+  # Postgres
+  - sh -c "if [ '$DB' = 'postgres' ]; then ./runDatabaseBuild.sh sample.postgresql.properties ; fi"
+  - df -h
+
+script:
+  - sh -c "if [ '$DB' = 'myRDBMS' ]; then ./runBenchmark.sh myRDBMS.properties; fi"
+
+  - sh -c "if [ '$DB' = 'postgres' ]; then ./runBenchmark.sh sample.postgresql.properties; fi"
+
+after_script:
+  - df -h
+  - df -ih
+  - cat benchmark.log
+  - cat terminalio.log
+
+
