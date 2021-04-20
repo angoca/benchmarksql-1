@@ -1,37 +1,36 @@
-## Welcome to GitHub Pages
+BenchmarkSQL is A TPC-C like test tool.
+It is implemented in Java, using JDBC to stress test SQL databases.
+The overall architecture is a series of data structures, queues and thread groups that handle the simulated terminals, users and application threads.
 
-You can use the [editor on GitHub](https://github.com/angoca/benchmarksql-1/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## Databases
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Currently it support these RDBMS:
 
-### Markdown
+ * Postgres.
+ * Oracle DB.
+ * MariaDB.
+ * SQL server.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Benchmark
 
-```markdown
-Syntax highlighted code block
+The benchmark performed in the database follows the guidelines of the Transaction Process Council - TPC, in its TPC-C test.
 
-# Header 1
-## Header 2
-### Header 3
+## Source code
 
-- Bulleted
-- List
+As stated before, this database benchmark tool is written in Java.
+It has some Python modules to monitor the performance.
 
-1. Numbered
-2. List
+The license is GNU Public License v2.
 
-**Bold** and _Italic_ and `Code` text
+## Documentation
 
-[Link](url) and ![Image](src)
-```
+It is hosted in ReadTheDocs.
+You can also access the documentation under the `docs` directory of the source code.
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Contributions
 
-### Jekyll Themes
+Contributions are welcome. You can create you own improvement and ask the integration via "Pull requests".
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/angoca/benchmarksql-1/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## Support
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+If you have an problem or you have detected an error, you can create an issue, and the community will help you find a solution.
